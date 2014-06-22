@@ -8,5 +8,49 @@
 *
 *  @author Darwin Biler <buonzz@gmail.com>
 */
-class Insight{  
+class Insight{ 
+	private $query_key;
+	private $insert_key;
+	private $account_id;
+
+	public function setQueryKey($api_key){
+		$this->query_key = $api_key;
+	}
+
+	public function setInsertKey($api_key){
+		$this->insert_key = $api_key;
+	}
+
+	public function setAccountID($account_id){
+		$this->account_id = $account_id;		
+	}
+
+	public function query($NRQL){
+
+		$url = "https://insights.newrelic.com/beta_api/accounts/". $this->account_id ."/query?nrql=" . urlencode($NRQL);
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_HEADER, 1);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);		
+		curl_setopt($ch, CURLOPT_USERAGENT, 'Buonzz Laravel Insight Library v1.0');		
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+	    'Accept: application/json',
+	    'X-Query-Key: ' . $this->query_key
+	    ));
+
+		$data = curl_exec($ch);
+		$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		$header_len = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+		$header = substr($data, 0, $header_len);
+		$body = substr($data, $header_len);
+
+		curl_close($ch);
+
+		return json_decode($body);
+	}
+
+	public function insertCustomEvent($data){
+
+	}
 }
