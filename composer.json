@@ -1,6 +1,7 @@
 {
     "name": "buonzz/l4-newrelic-insight",
     "description": "Laravel Library for Interacting with NewRelic's Insight",
+    "keywords": ["framework", "laravel", "newrelic", "newrelic insight", "php newrelic", "insight php"],
     "license": "Apache-2.0",
     "authors": [
         {
