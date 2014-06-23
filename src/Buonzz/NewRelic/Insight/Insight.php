@@ -50,7 +50,33 @@ class Insight{
 		return json_decode($body);
 	}
 
-	public function insertCustomEvent($data){
+	public function insertCustomEvents($events){
 
+		$url = "https://insights.newrelic.com/beta_api/accounts/". $this->account_id ."/events";
+		$data_string = json_encode($events);
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_HEADER, 1);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);		
+		curl_setopt($ch, CURLOPT_USERAGENT, 'Buonzz Laravel Insight Library v1.0');		
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+	    'Content-Type: application/json',
+	    'X-Insert-Key: ' . $this->insert_key,
+	    'Content-Length: ' . strlen($data_string)
+	    ));
+
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string); 
+
+		$data = curl_exec($ch);
+		$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		$header_len = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+		$header = substr($data, 0, $header_len);
+		$body = substr($data, $header_len);
+
+		curl_close($ch);
+
+		return json_decode($body);
 	}
 }

@@ -32,11 +32,36 @@ class InsightTest extends PHPUnit_Framework_TestCase{
   public function testIsAbleToExecuteQuery(){
     $var = new Buonzz\NewRelic\Insight\Insight;    
 
-    $var->setAccountID('XXXXX');
-    $var->setQueryKey('xxxxxxx');
+    $var->setAccountID(getenv('NEWRELIC_ACCOUNT_ID'));
+    $var->setQueryKey(getenv('NEWRELIC_QUERY_KEY'));
 
-    $resp = $var->query("SELECT uniquecount(session) FROM PageView WHERE appName='yoursite.com' SINCE 1 hour ago COMPARE WITH 1 hour ago");
+    $resp = $var->query("SELECT uniquecount(session) FROM PageView WHERE appName='PHP Application' SINCE 1 hour ago COMPARE WITH 1 hour ago");
     $this->assertTrue(is_object($resp));
+    
+    unset($var);    
+  }
+
+
+  /**
+  *  Check if the insertCustomEvents method is executing properly.
+  *
+  * This tests if the query method is working, basically, set first the AccountID and InsertKey
+  * This will surely fail if you dont. Adjust as well the appName value to reflect your actual appName
+  *
+  */
+  public function testIsAbleToInsertCustomEvents(){
+    $var = new Buonzz\NewRelic\Insight\Insight;    
+
+    $var->setAccountID(getenv('NEWRELIC_ACCOUNT_ID'));
+    $var->setInsertKey(getenv('NEWRELIC_INSERT_KEY'));
+
+    $events = array();
+    $events[] = array('eventType'=> 'Unit Test Executed', 'method'=> 'testIsAbleToInsertCustomEvents', 'class'=> 'InsightTest');
+    $events[] = array('eventType'=> 'Unit Test Ended', 'method'=> 'testIsAbleToInsertCustomEvents', 'class'=> 'InsightTest');
+
+    $resp = $var->insertCustomEvents($events);
+    $this->assertTrue(is_object($resp));
+    
     unset($var);    
   }
   
