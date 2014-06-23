@@ -11,3 +11,26 @@ Features
 * Unit-Testing with PHPUnit
 * PHPDocumentor
 
+
+Requirements
+------------
+
+* cURL
+* PHP >= 5.3.0
+
+Usage
+-----
+
+Require the package in your composer.json file
+
+    composer require buonzz/l4-newrelic-insight:dev-master
+Add the service provider and facade in your config/app.php
+Service Provider
+
+    Buonzz\NewRelic\Insight\Laravel4\ServiceProviders\InsightServiceProvider
+Facade
+
+    'Insight'            => 'Buonzz\NewRelic\Insight\Laravel4\Facades\Insight',
+
+
+
