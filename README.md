@@ -17,9 +17,12 @@ Requirements
 
 * cURL
 * PHP >= 5.3.0
+* Valid NewRelic Account ID - see http://newrelic.com/
+* NewRelic Insight API Query Key - see http://docs.newrelic.com/docs/insights/remote-queries
+* NewRelic Insight API Insert Key - see http://docs.newrelic.com/docs/insights/inserting-events
 
-Usage
------
+Installation
+------------
 
 Require the package in your composer.json file
 
@@ -32,5 +35,29 @@ Facade
 
     'Insight'            => 'Buonzz\NewRelic\Insight\Laravel4\Facades\Insight',
 
+Usage
+-----
 
+Set the account id's and keys.
+
+    Insight::setAccountID('<put your account id here>'); // used to associate your account to calls
+    Insight::setQueryKey('<put your query key here>'); // required to query data
+    Insight::setInsertKey('<put your insert key here>'); // this is when you need to send custom events
+    
+Execute Queries
+
+    $nrql = "SELECT uniquecount(session) FROM PageView";
+    $nrql .= "WHERE appName='PHP Application' SINCE 1 hour ago COMPARE WITH 1 hour ago";
+    $result = Insight::query($nrql);
+
+Send Custom Events
+
+    $events = array();
+    $events[] = array('eventType'=> 'Event Name', 'atrribute1'=> 'attribute value 1', 'attribute2'=> 'atrribute value 2');
+    Insight::insertCustomEvents($events);
+    
+
+    
+        
+    
 
