@@ -27,7 +27,7 @@ class Insight{
 
 	public function query($NRQL){
 
-		$url = "https://insights.newrelic.com/beta_api/accounts/". $this->account_id ."/query?nrql=" . urlencode($NRQL);
+		$url = "https://insights-api.newrelic.com/v1/accounts/". $this->account_id ."/query?nrql=" . urlencode($NRQL);
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
@@ -52,7 +52,7 @@ class Insight{
 
 	public function insertCustomEvents($events){
 
-		$url = "https://insights.newrelic.com/beta_api/accounts/". $this->account_id ."/events";
+		$url = "https://insights-api.newrelic.com/v1/accounts/". $this->account_id ."/events";
 		$data_string = json_encode($events);
 
 		$ch = curl_init();
