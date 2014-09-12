@@ -52,7 +52,7 @@ class Insight{
 
 	public function insertCustomEvents($events){
 
-		$url = "https://insights-api.newrelic.com/v1/accounts/". $this->account_id ."/events";
+		$url = "http://insights-collector.newrelic.com/v1/accounts/". $this->account_id ."/events";
 		$data_string = json_encode($events);
 
 		$ch = curl_init();

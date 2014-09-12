@@ -32,8 +32,17 @@ class InsightTest extends PHPUnit_Framework_TestCase{
   public function testIsAbleToExecuteQuery(){
     $var = new Buonzz\NewRelic\Insight\Insight;    
 
-    $var->setAccountID(getenv('NEWRELIC_ACCOUNT_ID'));
-    $var->setQueryKey(getenv('NEWRELIC_QUERY_KEY'));
+    $account_id = getenv('NEWRELIC_ACCOUNT_ID');
+    $query_key = getenv('NEWRELIC_QUERY_KEY');
+
+    if(!$account_id)
+      throw new Exception('NEWRELIC_ACCOUNT_ID environment variable should be set in able to run test');
+
+    if(!$query_key)
+      throw new Exception('NEWRELIC_QUERY_KEY environment variable should be set in able to run test');
+
+    $var->setAccountID($account_id);
+    $var->setQueryKey($query_key);
 
     $resp = $var->query("SELECT uniquecount(session) FROM PageView WHERE appName='PHP Application' SINCE 1 hour ago COMPARE WITH 1 hour ago");
     $this->assertTrue(is_object($resp));
@@ -60,7 +69,8 @@ class InsightTest extends PHPUnit_Framework_TestCase{
     $events[] = array('eventType'=> 'Unit Test Ended', 'method'=> 'testIsAbleToInsertCustomEvents', 'class'=> 'InsightTest');
 
     $resp = $var->insertCustomEvents($events);
-    $this->assertTrue(is_object($resp));
+
+    $this->assertTrue($resp->success);
     
     unset($var);    
   }
