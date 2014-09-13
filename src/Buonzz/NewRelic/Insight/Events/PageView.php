@@ -1,4 +1,4 @@
-<?php namespace Buonzz\NewRelic\Insight;
+<?php namespace Buonzz\NewRelic\Insight\Events;
 
 class PageView extends BaseEvent{
 	
