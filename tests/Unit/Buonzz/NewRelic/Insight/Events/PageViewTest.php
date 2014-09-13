@@ -30,7 +30,7 @@ class PageViewTest extends PHPUnit_Framework_TestCase{
     $pv->setQueryKey($query_key);
 
     $pageviews = $pv->find(11089834);   
-
+   
     $first = $pageviews->first();
     $this->assertTrue(strlen($first->appName)>0);
 
