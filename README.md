@@ -26,7 +26,7 @@ Installation
 
 Require the package in your composer.json file
 
-    composer require buonzz/l4-newrelic-insight:dev-master
+    composer require buonzz/l4-newrelic-insight
 Add the service provider and facade in your config/app.php
 Service Provider
 

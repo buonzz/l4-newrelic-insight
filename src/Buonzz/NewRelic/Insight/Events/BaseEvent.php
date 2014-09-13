@@ -20,6 +20,6 @@ class BaseEvent implements EventInterface{
 	}
 
 	public function setAccountID($account_id){
-		$this->insight->account_id = $account_id;		
+		$this->insight->setAccountID($account_id);		
 	}
 }
