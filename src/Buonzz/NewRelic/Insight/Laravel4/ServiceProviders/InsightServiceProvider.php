@@ -19,6 +19,8 @@ class InsightServiceProvider extends ServiceProvider{
 		$this->app->bind('insight', function(){
 			return new InsightFacadeObject;
 		});
+
+		$this->app['config']->package('buonzz/l4-newrelic-insight', __DIR__.'/../../../../../config');
 	}
 
 	public function boot()
