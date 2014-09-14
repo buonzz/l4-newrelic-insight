@@ -35,15 +35,20 @@ Facade
 
     'Insight'            => 'Buonzz\NewRelic\Insight\Laravel4\Facades\Insight',
 
+Pubish the configuration file
+
+    php artisan config:publish buonzz/l4-newrelic-insight
+    
+Edit the config file in app/config/packages/buonzz/l4-newrelic-insight/config.php
+
+* account_id - is required, this should be your NewRelic Account ID
+* query_key - required when you need to retrieve data from NewRelic
+* insert_key - required when you need to insert custom events 
+
+
 Usage
 -----
 
-Set the account id's and keys.
-
-    Insight::setAccountID('<put your account id here>'); // used to associate your account to calls
-    Insight::setQueryKey('<put your query key here>'); // required to query data
-    Insight::setInsertKey('<put your insert key here>'); // this is when you need to send custom events
-    
 Execute Queries
 
     $nrql = "SELECT uniquecount(session) FROM PageView";
@@ -55,6 +60,12 @@ Send Custom Events
     $events = array();
     $events[] = array('eventType'=> 'Event Name', 'atrribute1'=> 'attribute value 1', 'attribute2'=> 'atrribute value 2');
     Insight::insertCustomEvents($events);
+    
+You can also dynamically set the config settings in runtime:
+
+    Insight::setAccountID('<put your account id here>'); // used to associate your account to calls
+    Insight::setQueryKey('<put your query key here>'); // required to query data
+    Insight::setInsertKey('<put your insert key here>'); // this is when you need to send custom events
     
 
     
