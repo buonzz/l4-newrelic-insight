@@ -1,4 +1,4 @@
-<?php namespace Buonzz\NewRelic\Insigh\Laravel4;
+<?php namespace Buonzz\NewRelic\Insight\Laravel4;
 
 class InsightFacadeObject{ 
 	private $insight;	
