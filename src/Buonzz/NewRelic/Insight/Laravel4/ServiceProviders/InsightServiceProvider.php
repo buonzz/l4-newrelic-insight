@@ -16,15 +16,8 @@ class InsightServiceProvider extends ServiceProvider{
 	*  @return Insight;
 	*/
 	public function register(){
-		$this->app['insight'] = $this->app->share(function($app)
-		{
-		  return new Insight;
-		});
-
-	  	$this->app->booting(function()
-		{
-		  $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-		  $loader->alias('Insight', 'Buonzz\NewRelic\Insight\Insight');
+		$this->app->bind('insight', function(){
+			return new Insight;
 		});
 	}
 
