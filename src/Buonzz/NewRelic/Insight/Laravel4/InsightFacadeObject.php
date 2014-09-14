@@ -6,7 +6,10 @@ class InsightFacadeObject{
 	private $insight;	
 
 	public function __construct(){
-		return $this->insight = new Insight;				
+		$this->insight = new Insight;				
+		$this->insight->setAccountID(\Config::get('l4-newrelic-insight::account_id'));
+		$this->insight->setQueryKey(\Config::get('l4-newrelic-insight::query_key'));
+		$this->insight->setInsertKey(\Config::get('l4-newrelic-insight::insert_key'));		
 	}
 
 	public function setQueryKey($api_key){
