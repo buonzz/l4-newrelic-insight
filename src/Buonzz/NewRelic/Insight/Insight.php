@@ -27,6 +27,14 @@ class Insight{
 
 	public function query($NRQL){
 
+
+	  if(strlen($this->account_id)<=0)
+      	throw new \Exception('account id should be set in able to run queries');
+
+      if(strlen($this->query_key)<=0)
+      	throw new \Exception('query key should be set in able to run queries');
+
+
 		$url = "https://insights-api.newrelic.com/v1/accounts/". $this->account_id ."/query?nrql=" . urlencode($NRQL);
 
 		$ch = curl_init();
@@ -51,6 +59,12 @@ class Insight{
 	}
 
 	public function insertCustomEvents($events){
+
+		if(strlen($this->account_id)<=0)
+      		throw new \Exception('account id should be set in able to post custom events');
+
+      	if(strlen($this->insert_key)<=0)
+      		throw new \Exception('insert key should be set in able to post custom events');
 
 		$url = "http://insights-collector.newrelic.com/v1/accounts/". $this->account_id ."/events";
 		$data_string = json_encode($events);
