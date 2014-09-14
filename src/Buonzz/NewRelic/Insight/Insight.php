@@ -12,6 +12,7 @@ class Insight{
 	private $query_key;
 	private $insert_key;
 	private $account_id;
+	private $timeout = 15;
 
 	public function setQueryKey($api_key){
 		$this->query_key = $api_key;
@@ -41,7 +42,8 @@ class Insight{
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_HEADER, 1);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);		
-		curl_setopt($ch, CURLOPT_USERAGENT, 'Buonzz Laravel Insight Library v1.0');		
+		curl_setopt($ch, CURLOPT_USERAGENT, 'Buonzz Laravel Insight Library v1.0');
+		curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $this->timeout);		
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 	    'Accept: application/json',
 	    'X-Query-Key: ' . $this->query_key
@@ -73,7 +75,8 @@ class Insight{
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_HEADER, 1);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);		
-		curl_setopt($ch, CURLOPT_USERAGENT, 'Buonzz Laravel Insight Library v1.0');		
+		curl_setopt($ch, CURLOPT_USERAGENT, 'Buonzz Laravel Insight Library v1.0');
+		curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $this->timeout);	
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 	    'Content-Type: application/json',
 	    'X-Insert-Key: ' . $this->insert_key,
