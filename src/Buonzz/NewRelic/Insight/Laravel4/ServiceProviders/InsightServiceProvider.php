@@ -1,7 +1,7 @@
 <?php namespace Buonzz\NewRelic\Insight\Laravel4\ServiceProviders;
 
 use Illuminate\Support\ServiceProvider;
-use Buonzz\NewRelic\Insight\Insight as Insight;
+use Buonzz\NewRelic\Insight\Laravel4\InsightFacadeObject as Insight;
 
 /**
 *  The Laravel4 Service provider to bind the class to the IoC container
@@ -23,6 +23,6 @@ class InsightServiceProvider extends ServiceProvider{
 
 	public function boot()
 	{
-		$this->package('buonzz/insight');
+		$this->package('buonzz/l4-newrelic-insight');
 	}
 }
