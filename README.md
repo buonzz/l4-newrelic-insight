@@ -67,7 +67,19 @@ You can also dynamically set the config settings in runtime:
     Insight::setQueryKey('<put your query key here>'); // required to query data
     Insight::setInsertKey('<put your insert key here>'); // this is when you need to send custom events
     
+List PageViews within the last hour
 
+```
+use Buonzz\NewRelic\Insight\Aggregates\PageView;
+
+Route::get('pageviews', function()
+{
+	$pv = new PageView();
+	$pageviews = $pv->all();
+	return $pageviews;
+});
+
+```
     
         
     
