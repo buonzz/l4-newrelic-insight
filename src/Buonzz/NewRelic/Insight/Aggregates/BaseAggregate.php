@@ -15,7 +15,7 @@ class BaseAggregate{
 		$this->insight->setQueryKey(\Config::get('l4-newrelic-insight::query_key'));
 		$this->insight->setInsertKey(\Config::get('l4-newrelic-insight::insert_key'));
 		$this->insight->setAccountID(\Config::get('l4-newrelic-insight::account_id'));		
-		$this->eventName = get_class();		
+		$this->eventName = (new \ReflectionClass($this))->getShortName();		
 
 		return $this;
 	}
