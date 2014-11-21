@@ -15,11 +15,7 @@ class PageView extends BaseEvent{
 	public $userAgentName;
 	public $userAgentOS;
 	public $userAgentVersion;
-
-	public function __construct(){
-		parent::__construct();		
-	}
-
+	
 	public function find($appID){		
 		
 		$nrql = "SELECT * from PageView Where appId = '{$appID}'";
