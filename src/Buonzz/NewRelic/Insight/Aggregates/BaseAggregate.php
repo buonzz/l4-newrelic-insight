@@ -1,6 +1,7 @@
 <?php namespace Buonzz\NewRelic\Insight\Aggregates;
 
 use Buonzz\NewRelic\Insight\Insight;
+use Illuminate\Support\Collection;
 
 class BaseAggregate{	
 	
