@@ -22,7 +22,7 @@ class BaseAggregate{
 
 	public function all(){
 
-		$nrql = "SELECT * FROM " . $this->eventName . " SINCE ";
+		$nrql = "SELECT * FROM " . $this->eventName;
 		$data = $this->insight->query($nrql);
 
 		$col = new Collection($data->results[0]->events);
